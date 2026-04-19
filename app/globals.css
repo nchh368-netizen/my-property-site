@@ -1,0 +1,735 @@
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --bg:              #080807;
+  --surface:         #0f0f0d;
+  --card:            #131210;
+  --card2:           #191714;
+  --border:          rgba(201, 168, 76, 0.14);
+  --border-md:       rgba(201, 168, 76, 0.28);
+  --border-hi:       rgba(201, 168, 76, 0.55);
+  --gold:            #c9a84c;
+  --gold-light:      #e8d48b;
+  --gold-bright:     #f2cc5a;
+  --gold-muted:      rgba(201, 168, 76, 0.55);
+  --gold-subtle:     rgba(201, 168, 76, 0.07);
+  --text:            #f0e6c8;
+  --text-dim:        #8a7a5c;
+  --text-muted:      #4a3e28;
+  --danger:          #e05555;
+  --danger-bg:       rgba(224, 85, 85, 0.10);
+  --danger-border:   rgba(224, 85, 85, 0.22);
+  --green:           #4cc97a;
+  --radius:          18px;
+  --radius-sm:       11px;
+  --radius-xs:       8px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 20% 0%,   rgba(201, 168, 76, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 95%,  rgba(201, 168, 76, 0.04) 0%, transparent 70%);
+}
+
+/* ─── Page Layout ───────────────────────────────────────────────────────────── */
+.page {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 48px 18px 80px;
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  background: var(--gold-subtle);
+  border: 1px solid var(--border-md);
+  border-radius: 16px;
+  color: var(--gold);
+  margin-bottom: 18px;
+  box-shadow: 0 0 28px rgba(201, 168, 76, 0.08);
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  line-height: 1.3;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-bright) 45%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Mode Toggle ───────────────────────────────────────────────────────────── */
+.mode-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 4px;
+  margin-bottom: 18px;
+  gap: 4px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 11px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-muted);
+  transition: background 0.22s, color 0.22s, border-color 0.22s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.14) 0%, rgba(201, 168, 76, 0.07) 100%);
+  color: var(--gold-light);
+  border-color: rgba(201, 168, 76, 0.22);
+}
+
+/* ─── Cards ─────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top shimmer line */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(201, 168, 76, 0.25) 50%, transparent 95%);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.07);
+}
+
+.card-icon {
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.card-icon-amber {
+  color: #e8963c;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: -0.2px;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* ─── Row Sections ──────────────────────────────────────────────────────────── */
+.row-section {
+  margin-bottom: 18px;
+}
+
+.row-section-title {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* ─── Data Rows ─────────────────────────────────────────────────────────────── */
+.data-row {
+  background: var(--card2);
+  border: 1px solid rgba(201, 168, 76, 0.07);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.data-row:hover {
+  border-color: rgba(201, 168, 76, 0.14);
+}
+
+.data-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.row-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-muted);
+}
+
+.row-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-subtotal {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Delete Button ─────────────────────────────────────────────────────────── */
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--radius-xs);
+  color: var(--danger);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  background: rgba(224, 85, 85, 0.2);
+  border-color: rgba(224, 85, 85, 0.45);
+}
+
+.delete-btn:active {
+  background: rgba(224, 85, 85, 0.3);
+}
+
+/* ─── Row Inputs ────────────────────────────────────────────────────────────── */
+.data-row-inputs {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.row-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 70px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  border-radius: var(--radius-xs);
+  padding: 7px 9px;
+  transition: border-color 0.15s;
+}
+
+.row-field:focus-within {
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+.row-prefix {
+  font-size: 12px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* !! font-size: 16px prevents iOS Safari from auto-zooming on focus !! */
+.row-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: inherit;
+  width: 100%;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.row-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.row-input::-webkit-outer-spin-button,
+.row-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.row-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.row-unit {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.row-op {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font-weight: 400;
+}
+
+/* ─── Add Row Button ────────────────────────────────────────────────────────── */
+.add-row-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 9px 12px;
+  background: transparent;
+  border: 1px dashed rgba(201, 168, 76, 0.18);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold-muted);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  margin-top: 2px;
+}
+
+.add-row-btn:hover {
+  background: var(--gold-subtle);
+  border-color: rgba(201, 168, 76, 0.35);
+  color: var(--gold);
+}
+
+.add-row-btn:active {
+  background: rgba(201, 168, 76, 0.12);
+}
+
+/* ─── Months Overdue ────────────────────────────────────────────────────────── */
+.months-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card2);
+  border: 1px solid rgba(201, 168, 76, 0.07);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.months-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
+}
+
+/* !! font-size: 16px prevents iOS Safari zoom !! */
+.months-input {
+  width: 64px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: var(--radius-xs);
+  padding: 6px 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-light);
+  font-family: inherit;
+  outline: none;
+  text-align: center;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s;
+}
+
+.months-input:focus {
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+.months-input::-webkit-outer-spin-button,
+.months-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.months-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* ─── Calculation Summary ───────────────────────────────────────────────────── */
+.calc-summary {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(201, 168, 76, 0.07);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+.calc-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 12px;
+  color: var(--text-dim);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.04);
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-line:last-child {
+  border-bottom: none;
+}
+
+.calc-line-indent {
+  padding-left: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.calc-line.calc-line-indent > span:first-child::before {
+  content: '↳ ';
+  font-size: 10px;
+}
+
+.calc-line-total {
+  padding-top: 10px;
+  margin-top: 4px;
+  border-top: 1px solid rgba(201, 168, 76, 0.1) !important;
+  border-bottom: none !important;
+}
+
+.calc-line-total span:first-child {
+  font-size: 13px !important;
+  font-weight: 700;
+  color: var(--text) !important;
+}
+
+.gold-val {
+  font-weight: 700;
+  font-size: 14px !important;
+  color: var(--gold) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── No Penalty Note ───────────────────────────────────────────────────────── */
+.no-penalty-note {
+  padding: 5px 0 5px 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.04);
+}
+
+/* ─── Exemption Line ────────────────────────────────────────────────────────── */
+.exempt-line {
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.exempt-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.exempt-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-md);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+  padding: 0;
+  color: transparent;
+}
+
+.exempt-checkbox-on {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg);
+}
+
+.exempt-checkbox:hover:not(.exempt-checkbox-on) {
+  border-color: var(--border-hi);
+}
+
+.exempt-field {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--border-md);
+  border-radius: 7px;
+  padding: 5px 9px;
+  min-width: 95px;
+  transition: opacity 0.18s, border-color 0.15s;
+}
+
+.exempt-field:focus-within {
+  border-color: rgba(201, 168, 76, 0.45);
+}
+
+.exempt-field.exempt-field-off {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.exempt-dollar {
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+/* !! font-size: 16px prevents iOS Safari zoom !! */
+.exempt-input {
+  flex: 1;
+  min-width: 55px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gold-light);
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.exempt-input:disabled {
+  color: var(--text-muted);
+  -webkit-text-fill-color: var(--text-muted);
+}
+
+.exempt-input::-webkit-outer-spin-button,
+.exempt-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.exempt-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* ─── Grand Total Card ──────────────────────────────────────────────────────── */
+.total-card {
+  background: linear-gradient(145deg, #1c1705 0%, #12100a 55%, #0b0a05 100%);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: var(--radius);
+  padding: 22px 22px 20px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(201, 168, 76, 0.05),
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(201, 168, 76, 0.04);
+}
+
+/* Gold top border */
+.total-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold-bright) 50%, var(--gold) 70%, transparent 100%);
+}
+
+/* Radial glow corner */
+.total-card::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.total-breakdown {
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 4px 0;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+}
+
+.total-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201, 168, 76, 0.22) 50%, transparent 100%);
+  margin-bottom: 16px;
+}
+
+.total-final-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.total-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.total-amount {
+  font-size: 38px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-bright) 45%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.live-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+  background: rgba(76, 201, 122, 0.1);
+  border: 1px solid rgba(76, 201, 122, 0.2);
+  border-radius: 100px;
+  padding: 5px 13px;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* ─── PDF Button ────────────────────────────────────────────────────────────── */
+.pdf-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 17px 24px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.11) 0%, rgba(201, 168, 76, 0.05) 100%);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold-light);
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* shimmer top line */
+.pdf-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-muted), transparent);
+}
+
+.pdf-btn:hover {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.18) 0%, rgba(201, 168, 76, 0.10) 100%);
+  border-color: var(--border-hi);
+}
+
+.pdf-btn:active {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.22) 0%, rgba(201, 168, 76, 0.14) 100%);
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 400px) {
+  .page {
+    padding: 32px 14px 60px;
+  }
+  .header h1 {
+    font-size: 19px;
+  }
+  .total-amount {
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+  .card {
+    padding: 18px 16px;
+  }
+  .months-label {
+    font-size: 11px;
+  }
+}
